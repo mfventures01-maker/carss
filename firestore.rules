@@ -1,0 +1,12 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Intentionally deny all client access until CARSS authorization rules
+    // are designed, tested, and reviewed. Admin SDK calls from trusted
+    // Cloud Functions bypass these rules and must enforce authorization.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
